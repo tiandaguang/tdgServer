@@ -9,13 +9,17 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.boot</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>tdgServer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>tdgServer</name>
     <description>Demo project for Spring Boot</description>
+
 
     <properties>
         <java.version>1.8</java.version>
+        <fastjson.version>1.1.32</fastjson.version>
+        <maven.compiler.version>1.8</maven.compiler.version>
+        <xxl-job.version>1.9.1</xxl-job.version>
     </properties>
 
     <dependencies>
@@ -51,6 +55,18 @@
             <version>1.13</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
             <version>0.2.0</version>
@@ -60,12 +76,6 @@
                     <groupId>com.google.guava</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!--调用短信发送RPC -->
-        <dependency>
-            <groupId>com.etc</groupId>
-            <artifactId>etc-manage-rpc-api</artifactId>
-            <version>2.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -77,38 +87,6 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
-        <!--对外rpc接口 -->
-        <dependency>
-            <groupId>etc.highway.rpc.api</groupId>
-            <artifactId>etc-highway-rpc-api</artifactId>
-            <version>2.2.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>dubbo</artifactId>
-                    <groupId>com.alibaba</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>fastjson</artifactId>
-                    <groupId>com.alibaba</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-beanutils</artifactId>
-                    <groupId>commons-beanutils</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>swagger-annotations</artifactId>
-                    <groupId>io.swagger</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-lang</artifactId>
-                    <groupId>commons-lang</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
@@ -122,10 +100,43 @@
     </dependencies>
 
     <build>
+        <finalName>tdgServer-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.5.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!--<skip>true</skip> -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.version}</source>
+                    <target>${maven.compiler.version}</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

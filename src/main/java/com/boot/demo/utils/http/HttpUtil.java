@@ -1,5 +1,6 @@
 package com.boot.demo.utils.http;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -13,7 +14,6 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,9 +28,8 @@ import java.util.Map;
  * @Author: sh
  * @Date: 2018/9/8 15:48
  */
+@Slf4j
 public class HttpUtil {
-
-    private static Logger logger = Logger.getLogger(HttpUtil.class);
 
     /**
      * get请求
@@ -136,7 +135,7 @@ public class HttpUtil {
                 String jsonString = EntityUtils.toString(responseEntity);
                 return jsonString;
             } else {
-                logger.error("请求返回:" + state + "(" + url + ")");
+                log.error("请求返回:" + state + "(" + url + ")");
             }
         } finally {
             if (response != null) {

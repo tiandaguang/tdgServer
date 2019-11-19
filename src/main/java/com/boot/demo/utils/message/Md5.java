@@ -1,4 +1,4 @@
-package com.etc.utils.message;
+package com.boot.demo.utils.message;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
