@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+
+dubbo:
+  consumer:
+    timeout: 60000
+    retries: 0
+    check: false
+  protocol:
+    port: 31111
+    name: dubbo
+  registry:
+    address: zookeeper://172.17.47.26:2181
+    id: etc-highway-tdg
+  application:
+    name: etc-highway-tdg
