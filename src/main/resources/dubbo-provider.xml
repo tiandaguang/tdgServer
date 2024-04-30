@@ -8,9 +8,12 @@
 
 
     <dubbo:application name="etc-highway-monitor"/>
-    <dubbo:consumer retries="${dubbo.retries}" timeout="${dubbo.timeout}" check="false"/>
-    <dubbo:registry address="${dubbo.registry.address}"/>
-    <dubbo:protocol name="dubbo" port="${dubbo.port}"/>
+<!--    <dubbo:consumer retries="${dubbo.retries}" timeout="${dubbo.timeout}" check="false"/>-->
+    <dubbo:consumer retries="2" timeout="2000" check="false"/>
+<!--    <dubbo:registry address="${dubbo.registry.address}"/>-->
+    <dubbo:registry address="10.4.86.9:2181"/>
+<!--    <dubbo:protocol name="dubbo" port="${dubbo.port}"/>-->
+    <dubbo:protocol name="dubbo" port="25556"/>
 
 
 </beans>

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 
 dubbo:
@@ -11,7 +11,7 @@ dubbo:
     port: 31111
     name: dubbo
   registry:
-    address: zookeeper://172.17.47.26:2181
+    address: zookeeper://10.4.86.9:2181
     id: etc-highway-tdg
   application:
     name: etc-highway-tdg

@@ -14,8 +14,8 @@ import java.util.Map;
  * @Author Tian Daguang
  **/
 @RestController
-@RequestMapping("demo")
-public class DemoController {
+@RequestMapping("pay")
+public class PayController {
     @PostMapping("send")
     public String send() throws Exception {
 
