@@ -3,6 +3,7 @@ package com.boot.demo.utils.http;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.*;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -116,15 +117,21 @@ public class HttpUtil {
      */
     public static String doPost(String url, String params) throws Exception {
 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
+        CloseableHttpClient httpclient = HttpClients.custom().disableAutomaticRetries().build();
         HttpPost httpPost = new HttpPost(url);
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectTimeout(10000)
+                .setConnectionRequestTimeout(10000)
+                .setSocketTimeout(10000)
+                .build();
         httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Content-Type", "application/json");
         String charSet = "UTF-8";
         StringEntity entity = new StringEntity(params, charSet);
         httpPost.setEntity(entity);
-        CloseableHttpResponse response = null;
+        httpPost.setConfig(requestConfig);
 
+        CloseableHttpResponse response = null;
         try {
 
             response = httpclient.execute(httpPost);
